@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Wi-Fi Media Player</title>
+
+    <!-- Lato Font -->
+    
+    <link href='./fonts/Lato-Light.woff2' rel='stylesheet' type='text/css'>
+    <link href='./fonts/Lato-Regular.woff2' rel='stylesheet' type='text/css'>
+    <link href='./fonts/Lato-Bold.woff2' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheet -->
+    <link href="css/gallery-materialize.css" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link href="./fonts/Material-Icons.woff2" rel="stylesheet">
+  </head>
+
+  <body class="blue-grey darken-2">
+
+    <!-- Navbar and Header -->
+    <nav class="nav-extended blue-grey darken-4">
+      <div class="nav-background">
+        <div class="pattern active"></div>
+      </div>
+      <div class="nav-wrapper container">
+        <a href="index.html" class="brand-logo"><i class="material-icons">wifi</i>Wi-Fi Media Player</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li class="active"><a href="index.html">Wi-Fi Media Player</a></li>
+          <li><a href="docs.html">Docs</a></li>
+        </ul>
+      </div>
+
+      <!-- Fixed Masonry Filters -->
+      <div class="categories-wrapper blue-grey darken-3">
+        <div class="categories-container">
+          <ul class="categories container">
+            <li class="active"><a href="#all">All</a></li>
+            <li><a href="#audio">Audio</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#book">Audio Books</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <ul class="side-nav" id="nav-mobile">
+      <li class="active"><a href="index.html"><i class="material-icons">wifi</i>Wi-Fi Media Player</a></li>
+      <li><a href="docs.html"><i class="material-icons">school</i>Docs</a></li>
+    </ul>
+
+    <!-- Gallery -->
+    <div id="portfolio" class="section gray">
+    
+    </div>
+
+
+    <!-- Core Javascript -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script type="text/javascript" src="js/ejs_production.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/galleryExpand.js"></script>
+    <!-- <script src="js/init.js"></script>-->
+    <script type="text/javascript">
+        var MEDIAITEMS;
+
+        function require(url, callback)
+        {
+            var e = document.createElement("script");
+            e.src = url;
+            e.type="text/javascript";
+            e.addEventListener('load', callback);
+            document.getElementsByTagName("head")[0].appendChild(e);
+        }
+
+        require("js/media.js", function() {
+            // load the template file, then render it with MEDIAITEMS
+            var template = "<div class=\"container\">\r\n\t<div class=\"gallery row\">\r\n\t\t<% for(var i=0; i<MEDIAITEMS.mediaItems.length; i++) {%>\r\n\t\t<div class=\"col l4 m6 s12 gallery-item gallery-expand gallery-filter <%= MEDIAITEMS.mediaItems[i].type %>\">\r\n\t\t\t<<%= MEDIAITEMS.mediaItems[i].tag %> class=\"gallery-cover gray\"<%= MEDIAITEMS.mediaItems[i].tag===\"audio\" ? 'controls' : '' %>>\r\n\t\t\t\t<source src=\"<%= MEDIAITEMS.mediaItems[i].url%>\" type=\"<%= MEDIAITEMS.mediaItems[i].tag %>/<%= MEDIAITEMS.mediaItems[i].extension %>\">\r\n\t\t\t</<%= MEDIAITEMS.mediaItems[i].tag %>>\r\n\t\t\t<div class=\"gallery-header\">\r\n\t\t\t\t<span><%= MEDIAITEMS.mediaItems[i].title %><\/span>\r\n\t\t\t</div>\r\n\t\t</div>\r\n\t\t<% } %>\r\n\t</div>\r\n</div>";
+            var renderedContent = new EJS({text: template}).render(MEDIAITEMS, null);
+            
+            var portfolio = document.getElementById('portfolio');
+            portfolio.innerHTML = renderedContent;
+        });
+        
+        require("js/init.js", null);
+      
+        
+
+
+    </script>
+
+  </body>
+</html>
