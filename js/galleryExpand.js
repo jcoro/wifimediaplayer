@@ -300,7 +300,7 @@
                     var moveTo;
                     if ($object.toArray()[0].tagName.toUpperCase() === "VIDEO") {
                         moveTo = 0;
-                        console.log($object.toArray()[0].tagName.toUpperCase());
+                       // console.log($object.toArray()[0].tagName.toUpperCase());
                     } else {
                         moveTo = Math.round(windowHeight/2);
                     }
